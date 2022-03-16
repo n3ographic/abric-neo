@@ -1,0 +1,15 @@
+-- create a table
+CREATE TABLE formulaire (
+  id INTEGER PRIMARY KEY,
+  prenom CHAR(50) ,
+  nom CHAR(50) ,
+  email CHAR(150),
+  age INT,
+  ville CHAR(150)
+ 
+);
+-- insert some values
+INSERT INTO formulaire VALUES (1, 'Neo', 'ABRIC', 'abricneo@gmail.com', '19', 'Montpellier');
+INSERT INTO formulaire VALUES (1, 'Romain', 'ABRIC', 'abricromain@gmail.com', '20', 'Lyon');
+-- fetch some values
+SELECT * FROM formulaire
