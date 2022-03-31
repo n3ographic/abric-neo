@@ -1,15 +1,60 @@
--- create a table
-CREATE TABLE formulaire (
-  id INTEGER PRIMARY KEY,
-  prenom CHAR(50) ,
-  nom CHAR(50) ,
-  email CHAR(150),
-  age INT,
-  ville CHAR(150)
- 
+
+create table formulaire (
+	id INT,
+	prenom VARCHAR(50),
+	nom VARCHAR(50),
+	email VARCHAR(50),
+	age INT,
+	ville VARCHAR(50)
 );
--- insert some values
-INSERT INTO formulaire VALUES (1, 'Neo', 'ABRIC', 'abricneo@gmail.com', '19', 'Montpellier');
-INSERT INTO formulaire VALUES (2, 'Romain', 'ABRIC', 'abricromain@gmail.com', '20', 'Lyon');
--- fetch some values
-SELECT * FROM formulaire
+insert into formulaire (id, prenom, nom, email, age, ville) values (1, 'Lén', 'Pretsell', 'bpretsell0@java.com', 17, 'Numata');
+insert into formulaire (id, prenom, nom, email, age, ville) values (2, 'Kévina', 'Fox', 'cfox1@businessweek.com', 46, 'Novovolyns’k');
+insert into formulaire (id, prenom, nom, email, age, ville) values (3, 'Aí', 'Domenge', 'jdomenge2@about.com', 36, 'Camabatela');
+insert into formulaire (id, prenom, nom, email, age, ville) values (4, 'Marie-thérèse', 'Spain', 'cspain3@indiegogo.com', 49, 'Yoro');
+insert into formulaire (id, prenom, nom, email, age, ville) values (5, 'Cinéma', 'Godain', 'dgodain4@gmpg.org', 51, 'Grabica');
+insert into formulaire (id, prenom, nom, email, age, ville) values (6, 'Marie-noël', 'Grzesiewicz', 'wgrzesiewicz5@harvard.edu', 26, 'Ipoh');
+insert into formulaire (id, prenom, nom, email, age, ville) values (7, 'Aurélie', 'Cassel', 'acassel6@ycombinator.com', 47, 'Los Rastrojos');
+insert into formulaire (id, prenom, nom, email, age, ville) values (8, 'Kuí', 'Copsey', 'bcopsey7@dot.gov', 18, 'Korolevo');
+insert into formulaire (id, prenom, nom, email, age, ville) values (9, 'Personnalisée', 'Somerscales', 'qsomerscales8@google.com', 99, 'Mari');
+insert into formulaire (id, prenom, nom, email, age, ville) values (10, 'Simplifiés', 'Fogt', 'mfogt9@studiopress.com', 27, 'Khiwa');
+insert into formulaire (id, prenom, nom, email, age, ville) values (11, 'Annotés', 'Sparling', 'dsparlinga@yellowpages.com', 19, 'Kupang');
+insert into formulaire (id, prenom, nom, email, age, ville) values (12, 'Yóu', 'Batterham', 'nbatterhamb@biglobe.ne.jp', 12, 'Sukahening');
+insert into formulaire (id, prenom, nom, email, age, ville) values (13, 'Anaé', 'Gilhooly', 'cgilhoolyc@epa.gov', 21, 'Ciudad Arce');
+insert into formulaire (id, prenom, nom, email, age, ville) values (14, 'Gaétane', 'Kimmings', 'hkimmingsd@whitehouse.gov', 25, 'Xianren');
+insert into formulaire (id, prenom, nom, email, age, ville) values (15, 'Erwéi', 'Cramond', 'zcramonde@is.gd', 32, 'Villa Hayes');
+insert into formulaire (id, prenom, nom, email, age, ville) values (16, 'Eloïse', 'Straneo', 'lstraneof@wikimedia.org', 19, 'Shibata');
+insert into formulaire (id, prenom, nom, email, age, ville) values (17, 'Marylène', 'Pothbury', 'cpothburyg@trellian.com', 27, 'Houston');
+insert into formulaire (id, prenom, nom, email, age, ville) values (18, 'Andréa', 'McFadin', 'hmcfadinh@dropbox.com', 36, 'Maputsoe');
+insert into formulaire (id, prenom, nom, email, age, ville) values (19, 'Mélys', 'Vizor', 'kvizori@constantcontact.com', 66, 'Old Harbour Bay');
+insert into formulaire (id, prenom, nom, email, age, ville) values (20, 'Gösta', 'Banyard', 'abanyardj@storify.com', 24, 'Makurdi');
+insert into formulaire (id, prenom, nom, email, age, ville) values (21, 'Maéna', 'Boldison', 'mboldisonk@admin.ch', 29, 'Laspezia');
+insert into formulaire (id, prenom, nom, email, age, ville) values (22, 'Méthode', 'Tangye', 'etangyel@hugedomains.com', 54, 'Nanganga');
+insert into formulaire (id, prenom, nom, email, age, ville) values (23, 'Athéna', 'Scrivenor', 'jscrivenorm@scribd.com', 22, 'Huangtang');
+insert into formulaire (id, prenom, nom, email, age, ville) values (24, 'Clélia', 'Beeken', 'tbeekenn@xing.com', 34, 'Ejidal');
+insert into formulaire (id, prenom, nom, email, age, ville) values (25, 'Inès', 'Helkin', 'chelkino@livejournal.com', 32, 'Borås');
+insert into formulaire (id, prenom, nom, email, age, ville) values (26, 'Marlène', 'Keddy', 'rkeddyp@youtube.com', 36, 'Guolemude');
+insert into formulaire (id, prenom, nom, email, age, ville) values (27, 'Illustrée', 'Ivanichev', 'mivanichevq@bigcartel.com', 47, 'Birao');
+insert into formulaire (id, prenom, nom, email, age, ville) values (28, 'Erwéi', 'Matejic', 'smatejicr@people.com.cn', 78, 'Cache Creek');
+insert into formulaire (id, prenom, nom, email, age, ville) values (29, 'Mylène', 'Zapatero', 'hzapateros@jigsy.com', 23, 'Nice');
+insert into formulaire (id, prenom, nom, email, age, ville) values (30, 'Dù', 'Beldon', 'abeldont@xrea.com', 22, 'Kalá Déndra');
+
+
+/*SELECT prenom, nom FROM formulaire WHERE prenom LIKE 'n%'*/
+
+DELETE FROM formulaire WHERE nom LIKE 'C%';
+SELECT * FROM formulaire;
+
+
+
+UPDATE formulaire
+SET prenom = 'Antoine'
+WHERE prenom LIKE 'e%';
+
+SELECT * FROM formulaire;
+
+
+
+
+
+
+
