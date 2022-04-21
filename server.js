@@ -4,22 +4,28 @@ const app = require('./app');
 app.set('port', process.env.PORT || 3000);
 const server = http.createServer(app);
 
-/*
+
 var mysql      = require('mysql');
 var connection = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
-  password : 'Dudule_0404'
+  password : 'root',
+  database : 'formulaire'
 });
 
 connection.connect();
 
-connection.query('SELECT 1 + 1 AS solution', function(err, rows, fields) {
+connection.connect(function(err) {
   if (err) throw err;
-  console.log('The solution is: ', rows[0].solution);
+  console.log("Connecté à la base de données MySQL!");
+  connection.query("SELECT * FROM formulaire", function (err, result) {
+    if (err) throw err;
+    console.log(result);
+  });
+
 });
 
 connection.end(); 
-*/
+
 
 server.listen(process.env.PORT || 3000);

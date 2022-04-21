@@ -11,34 +11,40 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use('/api/stuff', (req, res, next) => {
-  const stuff = [
-    {
-      _id: 'oeihfzeoi',
-      title: 'Mon premier objet',
-      description: 'Les infos de mon premier objet',
-      imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-      price: 4900,
-      userId: 'qsomihvqios',
-    },
-    {
-      _id: 'oeihfzeomoihi',
-      title: 'Mon deuxième objet',
-      description: 'Les infos de mon deuxième objet',
-      imageUrl: 'https://cdn.pixabay.com/photo/2019/06/11/18/56/camera-4267692_1280.jpg',
-      price: 2900,
-      userId: 'qsomihvqios',
-    },
+app.get('/formulaire', (req, res, next) => {
+  res.send('SELECT * FROM formulaire');
+});
 
-    {
-      prenom: 'Néo',
-      nom: 'Les infos de mon premier objet',
-      email: 'abricneo@gmail.com',
-      age: 20,
-      ville: 'Montpellier',
-    },
-  ];
-  res.status(200).json(stuff);  
+app.post('/formulaire', (req, res, next) => {
+  var c = 'C%'
+  res.send('DELETE FROM formulaire WHERE nom LIKE' + c );
+});
+
+app.get('/formulaire', (req, res, next) => {
+  res.send('SELECT * FROM formulaire');
+});
+
+app.get('/formulaire', (req, res, next) => {
+  res.send('SELECT * FROM formulaire');
+});
+
+app.put('/formulaire', (req, res, next) => {
+  var prenom = 'Antoine';
+  var prenomUpdate = 'E%';
+  res.send('UPDATE formulaire SET prenom = ' + prenom + ' WHERE prenom LIKE ' + prenomUpdate);
+});
+
+app.get('/formulaire', (req, res, next) => {
+  res.send('SELECT * FROM formulaire');
+});
+
+app.get('/formulaire', (req, res, next) => {
+  var nom = 'C%'
+  res.delete('DELETE FROM formulaire WHERE nom LIKE ' + nom );
+});
+
+app.get('/formulaire', (req, res, next) => {
+  res.send('SELECT * FROM formulaire');
 });
 
 module.exports = app;
