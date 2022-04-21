@@ -24,10 +24,6 @@ app.get('/formulaire', (req, res, next) => {
   res.send('SELECT * FROM formulaire');
 });
 
-app.get('/formulaire', (req, res, next) => {
-  res.send('SELECT * FROM formulaire');
-});
-
 app.put('/formulaire', (req, res, next) => {
   var prenom = 'Antoine';
   var prenomUpdate = 'E%';
@@ -38,9 +34,9 @@ app.get('/formulaire', (req, res, next) => {
   res.send('SELECT * FROM formulaire');
 });
 
-app.get('/formulaire', (req, res, next) => {
+app.delete('/formulaire', (req, res, next) => {
   var nom = 'C%'
-  res.delete('DELETE FROM formulaire WHERE nom LIKE ' + nom );
+  res.send('DELETE FROM formulaire WHERE nom LIKE ' + nom );
 });
 
 app.get('/formulaire', (req, res, next) => {

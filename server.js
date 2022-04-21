@@ -1,31 +1,27 @@
 const http = require('http');
 const app = require('./app');
+var mysql      = require('mysql');
 
 app.set('port', process.env.PORT || 3000);
 const server = http.createServer(app);
 
 
-var mysql      = require('mysql');
-var connection = mysql.createConnection({
-  host     : 'localhost',
-  user     : 'root',
-  password : 'root',
-  database : 'formulaire'
-});
-
-connection.connect();
-
-connection.connect(function(err) {
-  if (err) throw err;
-  console.log("Connecté à la base de données MySQL!");
-  connection.query("SELECT * FROM formulaire", function (err, result) {
-    if (err) throw err;
-    console.log(result);
-  });
-
-});
-
-connection.end(); 
-
+function handleSql(mode,callback){
+	var con = mySql.createConnection({
+    host     : 'localhost',
+    user     : 'root',
+    password : 'root',
+    database : 'formulaire'
+	 });
+	con.connect(function(err){
+	 if(err) throw err;
+	});
+	var sql = 'SELECT * FROM formulaire';
+	con.query(sql,function(err,result,fields){
+	  if(err) throw err;
+	  if(callback) callback(err,result,fields);
+	}); 
+	con.end();
+};
 
 server.listen(process.env.PORT || 3000);
