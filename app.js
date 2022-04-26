@@ -10,11 +10,12 @@ app.use(express.urlencoded({extended: true}));
 app.use(express.json());
 
 
-const con = mySql.createConnection({
+const con = mysql.createConnection({
   host     : 'localhost',
   user     : 'root',
   password : 'root',
-  database : 'formulaire'
+  database : 'formulaire',
+  port : 3306
 	});
 
 
@@ -31,57 +32,59 @@ app.use((req, res, next) => {
   next();
 });
 
+app.get('/', (req, res, next) =>{
+  res.send('Formulaire sélectionné')
+})
+
 app.get('/formulaire', (req, res, next) => {
   con.query('SELECT * FROM formulaire', (err, rows, fields) => {
-    if(err) throw err
-    console.log('The solution is :', rows[0].solution);
+    
+    console.log('The solution is :', rows);
 
 })
-res.send(rows[0].solution);
+//res.send(rows[0].solution);
 });
 
 
 app.post('/formulaire-add/:nom/:prenom/:nom/:email/:ville', (req, res, next) => {
-  var c = 'C%';
-  var nom = 'Lén';
-  var prenom = 'Pretsell';
-  var mail = 'bpretsell0@java.com';
-  var ville = 'Numata';
+  var nom = req.params.nom;
+  var prenom = req.params.prenom;
+  var mail = req.params.mail;
+  var ville = req.params.ville;
 
-  con.query('insert into formulaire (id, prenom, nom, email, age, ville) values', (err, rows, fields) => {
+  con.query('INSERT INTO formulaire (prenom, nom, email, age, ville) values(' + nom + prenom + mail +  ville +')', (err, rows, fields) => {
     if(err) throw err
-    console.log('The solution is :', rows[0].solution);
+    console.log('The solution is :', rows);
 
 })
-  res.send(rows[0].solution);
+  //res.send(rows[0].solution);
 });
 
 
-app.put('/formulaire-update/:prenom', (req, res, next) => {
-  var prenom = 'Antoine';
-  var prenomUpdate = 'E%';
+app.put('/formulaire-update/:prenom/:prenomUpdate', (req, res, next) => {
+  var prenom = req.params.prenom;
+  var prenomUpdate = req.params.prenomUpdate;
   con.query(('UPDATE formulaire SET prenom = ' + prenom + ' WHERE prenom LIKE ' + prenomUpdate), (err, rows, fields) => {
     if(err) throw err
-    console.log('The solution is :', rows[0].solution);
+    console.log('The solution is :', rows);
 
 })
 
-  res.send(rows[0].solution);
+ // res.send(rows[0].solution);
 });
 
 
-app.delete('/formulaire-delete', (req, res, next) => {
-  var nom = 'C%'
-
+app.delete('/formulaire-delete/:nom', (req, res, next) => {
+  var nom = req.params.nom;
   con.query(('DELETE FROM formulaire WHERE nom LIKE ' + nom), (err, rows, fields) => {
     if(err) throw err
-    console.log('The solution is :', rows[0].solution);
+    console.log('The solution is :', rows);
 
 })
-res.send(rows[0].solution);
+//res.send(rows[0].solution);
 });
 
 
 
 con.end();
-app.listen(port, () => console.log('listening on port ${port}'));
+app.listen(port, () => console.log(`listening on port ${port}`));
