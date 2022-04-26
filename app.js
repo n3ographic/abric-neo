@@ -2,12 +2,14 @@ const http = require('http');
 const express = require('express');
 const bodyParser = require('body-parser')
 const mysql = require('mysql');
+const { parseUrl } = require('mysql/lib/ConnectionConfig');
 
 const app = express();
 const port = process.env.PORT || 3000;
 
 app.use(express.urlencoded({extended: true}));
 app.use(express.json());
+//app.use(bodyParser.json())
 
 
 const con = mysql.createConnection({
@@ -19,8 +21,17 @@ const con = mysql.createConnection({
 	});
 
 
-con.connect();
+/*try{
+  con.connect();
+} catch(e){
+    console.log("Oops ça marche pas")
+    console.log(e)
 
+  }*/
+
+
+
+con.connect();
 console.log("test")
 
 
@@ -33,27 +44,31 @@ app.use((req, res, next) => {
 });
 
 app.get('/', (req, res, next) =>{
+  
+
   res.send('Formulaire sélectionné')
+  
 })
 
 app.get('/formulaire', (req, res, next) => {
   con.query('SELECT * FROM formulaire', (err, rows, fields) => {
-    
+    //if(err) throw err;
     console.log('The solution is :', rows);
+  
 
 })
 //res.send(rows[0].solution);
 });
 
 
-app.post('/formulaire-add/:nom/:prenom/:nom/:email/:ville', (req, res, next) => {
+app.post('/formulaire/add/:nom/:prenom/:nom/:email/:ville', (req, res, next) => {
   var nom = req.params.nom;
   var prenom = req.params.prenom;
   var mail = req.params.mail;
   var ville = req.params.ville;
 
   con.query('INSERT INTO formulaire (prenom, nom, email, age, ville) values(' + nom + prenom + mail +  ville +')', (err, rows, fields) => {
-    if(err) throw err
+    //if(err) throw err;
     console.log('The solution is :', rows);
 
 })
@@ -61,11 +76,11 @@ app.post('/formulaire-add/:nom/:prenom/:nom/:email/:ville', (req, res, next) => 
 });
 
 
-app.put('/formulaire-update/:prenom/:prenomUpdate', (req, res, next) => {
+app.put('/formulaire/update/:prenom/:prenomUpdate', (req, res, next) => {
   var prenom = req.params.prenom;
   var prenomUpdate = req.params.prenomUpdate;
   con.query(('UPDATE formulaire SET prenom = ' + prenom + ' WHERE prenom LIKE ' + prenomUpdate), (err, rows, fields) => {
-    if(err) throw err
+    //if(err) throw err;
     console.log('The solution is :', rows);
 
 })
@@ -74,10 +89,10 @@ app.put('/formulaire-update/:prenom/:prenomUpdate', (req, res, next) => {
 });
 
 
-app.delete('/formulaire-delete/:nom', (req, res, next) => {
+app.delete('/formulaire/delete/:nom', (req, res, next) => {
   var nom = req.params.nom;
   con.query(('DELETE FROM formulaire WHERE nom LIKE ' + nom), (err, rows, fields) => {
-    if(err) throw err
+    //if(err) throw err;
     console.log('The solution is :', rows);
 
 })
