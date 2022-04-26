@@ -1,4 +1,4 @@
-const http = require('http');
+/*const http = require('http');
 const app = require('./app');
 var mysql      = require('mysql');
 
@@ -24,4 +24,4 @@ function handleSql(mode,callback){
 	con.end();
 };
 
-server.listen(process.env.PORT || 3000);
+server.listen(process.env.PORT || 3000);*/

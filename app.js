@@ -1,8 +1,28 @@
+const http = require('http');
 const express = require('express');
+const bodyParser = require('body-parser')
+const mysql = require('mysql');
 
 const app = express();
+const port = process.env.PORT || 3000;
+
+app.use(express.urlencoded({extended: true}));
+app.use(express.json());
+
+
+const con = mySql.createConnection({
+  host     : 'localhost',
+  user     : 'root',
+  password : 'root',
+  database : 'formulaire'
+	});
+
+
+con.connect();
 
 console.log("test")
+
+
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -12,35 +32,56 @@ app.use((req, res, next) => {
 });
 
 app.get('/formulaire', (req, res, next) => {
-  res.send('SELECT * FROM formulaire');
+  con.query('SELECT * FROM formulaire', (err, rows, fields) => {
+    if(err) throw err
+    console.log('The solution is :', rows[0].solution);
+
+})
+res.send(rows[0].solution);
 });
 
-app.post('/formulaire', (req, res, next) => {
-  var c = 'C%'
-  res.send('DELETE FROM formulaire WHERE nom LIKE' + c );
+
+app.post('/formulaire-add/:nom/:prenom/:nom/:email/:ville', (req, res, next) => {
+  var c = 'C%';
+  var nom = 'Lén';
+  var prenom = 'Pretsell';
+  var mail = 'bpretsell0@java.com';
+  var ville = 'Numata';
+
+  con.query('insert into formulaire (id, prenom, nom, email, age, ville) values', (err, rows, fields) => {
+    if(err) throw err
+    console.log('The solution is :', rows[0].solution);
+
+})
+  res.send(rows[0].solution);
 });
 
-app.get('/formulaire', (req, res, next) => {
-  res.send('SELECT * FROM formulaire');
-});
 
-app.put('/formulaire', (req, res, next) => {
+app.put('/formulaire-update/:prenom', (req, res, next) => {
   var prenom = 'Antoine';
   var prenomUpdate = 'E%';
-  res.send('UPDATE formulaire SET prenom = ' + prenom + ' WHERE prenom LIKE ' + prenomUpdate);
+  con.query(('UPDATE formulaire SET prenom = ' + prenom + ' WHERE prenom LIKE ' + prenomUpdate), (err, rows, fields) => {
+    if(err) throw err
+    console.log('The solution is :', rows[0].solution);
+
+})
+
+  res.send(rows[0].solution);
 });
 
-app.get('/formulaire', (req, res, next) => {
-  res.send('SELECT * FROM formulaire');
-});
 
-app.delete('/formulaire', (req, res, next) => {
+app.delete('/formulaire-delete', (req, res, next) => {
   var nom = 'C%'
-  res.send('DELETE FROM formulaire WHERE nom LIKE ' + nom );
+
+  con.query(('DELETE FROM formulaire WHERE nom LIKE ' + nom), (err, rows, fields) => {
+    if(err) throw err
+    console.log('The solution is :', rows[0].solution);
+
+})
+res.send(rows[0].solution);
 });
 
-app.get('/formulaire', (req, res, next) => {
-  res.send('SELECT * FROM formulaire');
-});
 
-module.exports = app;
+
+con.end();
+app.listen(port, () => console.log('listening on port ${port}'));
