@@ -21,18 +21,18 @@ const con = mysql.createConnection({
 	});
 
 
-/*try{
+try{
   con.connect();
 } catch(e){
     console.log("Oops ça marche pas")
     console.log(e)
 
-  }*/
+  }
 
 
 
-con.connect();
-console.log("test")
+/*con.connect();
+console.log("test")*/
 
 
 
@@ -54,14 +54,14 @@ app.get('/formulaire', (req, res, next) => {
   con.query('SELECT * FROM formulaire', (err, rows, fields) => {
     //if(err) throw err;
     console.log('The solution is :', rows);
-  
 
+  
 })
 //res.send(rows[0].solution);
 });
 
 
-app.post('/formulaire/add/:nom/:prenom/:nom/:email/:ville', (req, res, next) => {
+app.post('/formulaire/add!/:nom/:prenom/:nom/:email/:ville', (req, res, next) => {
   var nom = req.params.nom;
   var prenom = req.params.prenom;
   var mail = req.params.mail;
