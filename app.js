@@ -31,8 +31,8 @@ try{
 
 
 
-/*con.connect();
-console.log("test")*/
+/*con.connect();*/
+console.log("test")
 
 
 
